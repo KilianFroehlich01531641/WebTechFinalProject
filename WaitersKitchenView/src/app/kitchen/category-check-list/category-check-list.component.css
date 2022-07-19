@@ -1,0 +1,28 @@
+.mat-list-item:hover {
+    background-color: #afafafa1;
+}
+
+.mat-list-base .mat-list-item .mat-list-icon, .mat-list-base .mat-list-option .mat-list-icon {
+    font-size: 18px;
+}
+
+button {
+    background-color: #fcd073;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.1rem;
+    font-size: 16px;
+
+    padding: 5px 15px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+div {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* checkbox disabled (so you dont fire both check events, the checkbox check event and the container check event) -> set color */
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #ffd740;
+}

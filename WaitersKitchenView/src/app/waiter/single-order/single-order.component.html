@@ -1,0 +1,81 @@
+<style>
+    .order {
+        display: flex;
+    }
+
+    mat-list-item {
+        display: flex;
+    }
+</style>
+
+<div *ngIf="isExpanded === false" (click)="expand()">
+    <mat-list>
+        <mat-list-item>
+            <div [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+                <span
+                    [ngStyle]="{'margin-right': '15px', 'flex-basis': '5%', 'align-self': 'center', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}">
+                    #{{currentOrder.orderid}} </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '45%', 'align-self': 'center', 'padding': '10px'}">
+                    Status: {{currentOrder.status}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '70%', 'align-self': 'center', 'padding': '10px'}">
+                    Time: {{simpleTime}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '45%', 'align-self': 'center', 'padding': '10px'}">
+                    Table: {{currentOrder.tableid}}
+                </span>
+            </div>
+
+            <mat-divider></mat-divider>
+        </mat-list-item>
+    </mat-list>
+    <div class="order" *ngFor="let x of currentOrder.items">
+        <p [ngStyle]="{'flex-basis': '40%', 'align-self': 'center' }">{{x.title}}</p>
+        <p [ngStyle]="{'flex-basis': '30%', 'align-self': 'center' }">{{x.status}}</p>
+    </div>
+</div>
+<div *ngIf="isExpanded === true" (click)="collapse()">
+    <mat-list>
+        <mat-list-item>
+            <div mat-line [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+                <span
+                    [ngStyle]="{'margin-right': '15px', 'flex-basis': '5%', 'align-self': 'center', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}">
+                    #{{currentOrder.orderid}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '25%', 'align-self': 'center', 'padding': '10px'}">
+                    Status: {{currentOrder.status}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '40%', 'align-self': 'center', 'padding': '10px'}">
+                    Time: {{simpleDate}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '10%', 'align-self': 'center', 'padding': '10px'}">
+                    Table: {{currentOrder.tableid}}
+                </span>
+            </div>
+            <div mat-line [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '50%', 'align-self': 'center', 'padding': '10px'}">
+                    Payment: {{currentOrder.paymentreference}}
+                </span>
+                <span
+                    [ngStyle]="{'font-weight': 'bold', 'flex-basis': '45%', 'align-self': 'center', 'padding': '10px'}">
+                    Amount: {{currentOrder.totalamount}}€
+                </span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div class="order" *ngFor="let x of currentOrder.items">
+            <p [ngStyle]="{'flex-basis': '37%', 'align-self': 'center' }">{{x.title}}</p>
+            <p [ngStyle]="{'flex-basis': '15%', 'align-self': 'center' }">{{x.status}}</p>
+            <p [ngStyle]="{'flex-basis': '15%', 'align-self': 'center' }">{{x.price}}€</p>
+            <p [ngStyle]="{'flex-basis': '30%', 'align-self': 'center' }">{{x.allergens}}</p>
+            <p *ngIf="x.comment !== null" [ngStyle]="{'flex-basis': '30%', 'align-self': 'center' }">{{x.comment}}</p>
+        </div>
+    </mat-list>
+</div>

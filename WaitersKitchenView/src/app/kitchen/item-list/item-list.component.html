@@ -1,0 +1,68 @@
+<div cdkDropList (cdkDropListDropped)="reorderList($event)" [ngStyle]="{'background-color':'white', 'width': '100%'}"
+    class="dragdrop-wrapper">
+    <div class="dragdrop-inner item-list-item" *ngFor="let item of itemList; let i = index" cdkDrag
+        [cdkDragDisabled]="dragDisabled" [class.moveCursor]="!dragDisabled"
+        [ngStyle]="{'display': 'flex', 'padding': '10px 0'}">
+
+        <div class="itemnumber"
+            [ngStyle]="{'flex': '5%', 'text-align': 'center', 'padding': '0 10px', 'color': '#ffb81e'}">
+            #{{item.itemnumber}}</div>
+
+        <div [ngStyle]="{'flex': '15%', 'display': 'block', 'padding': '0 10px'}">
+            <p (click)="setStatus(item.itemnumber, 'ordered')">ordered <mat-icon>subdirectory_arrow_right
+                </mat-icon>
+            </p>
+            <p [ngClass]="{'grey': item.status == 'ordered'}" (click)="setStatus(item.itemnumber, 'in production')">
+                in
+                production <mat-icon>refresh</mat-icon>
+            </p>
+            <p [ngClass]="{'grey': item.status == 'ordered' || item.status == 'in production'}"
+                (dblclick)="setStatus(item.itemnumber, 'ready for pickup')">ready for pickup <mat-icon>
+                    compare_arrows</mat-icon>
+            </p>
+        </div>
+
+        <div [ngStyle]="{'flex': '60%', 'display': 'block'}">
+            <div [ngStyle]="{'display': 'flex', 'justify-content': 'flex-end'}">
+
+                <span
+                    [ngStyle]="{'flex': '50%', 'display': 'block', 'padding': '0px 10px', 'align-self': 'center'}">{{item.title}}
+                    ({{getNiceString(item.allergens)}})<div [matTooltip]=item.description [matTooltipShowDelay]="200"
+                        [ngStyle]="{'padding': '5px 0px', 'font-size': 'smaller', 'width': 'fit-content', 'cursor': 'default'}">
+                        details</div></span>
+
+                <span [ngStyle]="{'flex': '15%', 'text-align': 'center', 'padding': '0px 10px'}">ItemID:
+                    <br>{{item.itemid}}</span>
+                <span
+                    [ngStyle]="{'flex': '15%', 'text-align': 'center',  'padding': '0px 10px', 'border-left': '2px dashed black', 'border-right': '2px  dashed black'}">OrderID:
+                    <br>{{item.orderid}}</span>
+                <span [ngStyle]="{'flex': '20%', 'text-align': 'center', 'padding': '0px 10px'}">Date:
+                    <br>{{getTimeStamp(item.orderdate).split(' ')[1]}}</span>
+
+            </div>
+            <div [ngStyle]="{'display': 'flex'}">
+
+                <span [ngStyle]="{'flex-basis': '47%', 'padding': '0px 10px', 'align-self': 'center'}">
+                    <app-comment [dbitem]=item (onCommit)="fetchItemList()" (enterEdited)="dragDisabled = true"
+                        (exitEdited)="dragDisabled = false"></app-comment>
+                </span>
+
+                <span *ngIf="item.categories !== null"
+                    [ngStyle]="{'flex-basis': '50%', 'padding': '10px', 'margin-top': '2px'}">categories →
+                    {{getNiceString(item.categories)}}</span>
+                <!-- TODO why problem with flex here? 100% not working -->
+            </div>
+
+        </div>
+
+        <span [ngStyle]="{'flex': '10%', 'padding': '0px 10px', 'align-self': 'center', 'text-align': 'center'}">
+            {{item.price.toFixed(2)}} €</span>
+
+        <span *ngIf="item.menuitemstatus == 'available'; else red"
+            [ngStyle]="{'flex': '10%', 'text-align': 'center', 'padding': '5px', 'margin-right':'10px', 'color': '#7baa4c', 'font-weight': 'bold', 'border': '1px dashed #7baa4c', 'background': 'repeating-linear-gradient(-45deg, #7baa4c,  transparent 1px, transparent 5px)'}">{{item.menuitemstatus}}</span>
+        <ng-template #red>
+            <span
+                [ngStyle]="{'flex': '10%', 'text-align': 'center', 'padding': '5px', 'margin-right':'10px', 'color': '#da6548e7', 'font-weight': 'bold', 'border': '1px dashed #da6548e7', 'background': 'repeating-linear-gradient(-45deg, #da6548e7,  transparent 1px, transparent 5px)'}">{{item.menuitemstatus}}</span>
+        </ng-template>
+    </div>
+</div>

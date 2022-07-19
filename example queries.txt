@@ -1,0 +1,89 @@
+
+# join menucategories and menuitems
+# any() looks if any of the array elements fulfills the condition
+
+select * from menuitems i, menucategories c
+where c.categoryid = any(i.category)
+
+# join orders menucategories and menuitems
+
+select *
+from  menuitems i, menucategories c, (
+	select unnest(ordereditems) as p
+	from orders) x
+where c.categoryid = any(i.category)
+and (p).itemid = i.itemid
+
+# compare composite type filed of array to a calue
+# unnest() separates array into single rows; () around p essential!
+
+select * 
+from (
+    select unnest(ordereditems) as p
+    from orders) x
+where (p).itemid = 6
+
+
+-----------
+
+select unnest(ordereditems) as p, *
+from orders
+
+
+select (p).itemid, (p).number, (p).status, (p).comment, *
+from (select unnest(ordereditems) as p
+      from orders) x
+
+
+# mit bedingung
+
+select (p).itemid, (p).number, (p).status, (p).comment, *
+from  menuitems i, (
+    select unnest(ordereditems) as p
+    from orders) x
+where (p).itemid = i.itemid
+
+
+# all orders that have at least one item with the status ordered or in production
+
+select *
+from orders
+where orderid = any(select distinct orderid
+from (select unnest(ordereditems) as p, orderid
+      from orders) x
+where (p).status = 'ordered' or (p).status = 'in production')
+
+--------------
+
+# join of item instances of orders with menuitems
+
+select (p).itemid, (p).number as itemNumber, (p).status, (p).comment, m.title, m.description,
+m.price, m.categories, m.allergens, m.status as menuItemStatus
+from (select unnest(ordereditems) as p
+      from orders) x, menuitems as m
+where (p).itemid = m.itemid
+
+# get array of categorystrings for each menuitem
+
+select u.itemid, array_agg(c.title order by c.title asc)
+from (select unnest(menuitems.categories), itemid from menuitems) u, menucategories as c
+where u.unnest = c.categoryid
+group by u.itemid
+order by u.itemid asc
+
+# get items with categorystrings and menuitem info
+
+select (p).itemid, x.orderdate, x.orderid, (p).number as itemNumber, (p).status, (p).comment, m.title, m.description,
+m.price, s.arr as categories, m.allergens, m.status as menuItemStatus
+from 
+	 (select unnest(ordereditems) as p, orderdate, orderid from orders) x, 
+	 menuitems m,
+	 (select u.itemid, array_agg(c.title order by c.title asc) as arr
+	 from (select unnest(menuitems.categories), itemid from menuitems) u, menucategories as c
+	 where u.unnest = c.categoryid
+	 group by u.itemid
+	 order by u.itemid asc) s
+where (p).itemid = m.itemid 
+and s.itemid = m.itemid
+and ((p).status = 'ordered' or (p).status = 'in production')
+order by itemnumber

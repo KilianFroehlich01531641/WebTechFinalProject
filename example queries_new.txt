@@ -1,0 +1,60 @@
+select p.*, i.*
+from (select unnest(ordereditems), * 
+	  from orders o) p, 
+	  orderitems i
+where (p).unnest = i.number 
+and i.status in ('ordered', 'in production');
+
+### to get items with everything
+
+select i.itemid, p.orderdate, p.orderid, i.number as itemNumber, i.status, i.comment, m.title, m.description,
+m.price, s.arr as categories, m.allergens, m.status as menuItemStatus
+from (select unnest(ordereditems), * 
+	  from orders o) p, 
+	  orderitems i, 	 
+	  menuitems m,
+	  (select u.itemid, array_agg(c.title order by c.title asc) as arr
+	   from (select unnest(menuitems.categories), itemid 
+			 from menuitems) u, 
+	         menucategories as c
+	   where u.unnest = c.categoryid
+	   group by u.itemid
+	   order by u.itemid asc) s
+where (p).unnest = i.number
+and s.itemid = m.itemid
+and i.itemid = m.itemid
+and i.status in ('ordered', 'in production');
+
+###
+
+update orderitems
+set number = -1
+where number = 6;
+
+update orderitems
+set number = number + 1
+where number >= 3 and number < 6;
+
+update orderitems
+set number = 3
+where number = -1
+
+### group items of orders to arrays for each attribute
+
+select o.orderid, array_agg(i.itemid) as itemids, array_agg(i.number) as numbers
+from orders o, orderitems i
+where o.orderid = i.orderid
+group by o.orderid
+
+###
+
+select o.orderid, o.orderdate, o.tableid, o.totalamount, array_agg(i.itemid) as itemids, array_agg(i.number order by number asc) as itemnumbers,
+array_agg(m.title) as itemtitles, array_agg(m.description) as itemdescriptions, array_agg(m.price) as itemprices,
+array_agg(m.status) as menuItemStatuses
+from  orders o,
+	  orderitems i,
+	  menuitems m
+where o.orderid = i.orderid
+and i.itemid = m.itemid
+and i.status in ('ordered')
+group by o.orderid, o.orderdate, o.tableid, o.totalamount;

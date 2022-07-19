@@ -1,0 +1,16 @@
+mat-dialog-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    outline-color: red;
+}
+
+button {
+    margin-bottom: 10px;
+}

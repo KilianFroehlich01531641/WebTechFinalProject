@@ -1,0 +1,53 @@
+
+mat-list-item {
+    /* border: 3px solid #78aa27;
+    border-radius: 10px; */
+    margin: 3px;
+    font-size: 1.5vw;
+    height: auto;
+    padding: 10px 0;
+    /* box-sizing: content-box; */
+}
+
+/* todo make touch "hover" */
+mat-list-item:active, mat-list-item:hover {
+    background-color: #f0f0f0f0;
+}
+
+mat-divider {
+    border-top-color: rgb(161, 161, 161);
+}
+
+.mat-expansion-panel {
+    background: white;
+}
+
+.mat-expansion-panel:hover {
+    background: #f0f0f0f0;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+    z-index: 2;
+}
+
+.onTop {
+    z-index: 5;
+    /* background-color: red; */
+}
+
+/* not sure where the component css is set; therefore use of !important */
+.mat-expanded {
+    z-index: 50 !important;
+    background-color: yellowgreen;
+}
+
+/* ::ng-deep .mat-list-item-content { */
+    /* height: 500px;
+    color: red; */
+/* } */
+
+/* https://stackoverflow.com/questions/47377146/angular-material-5-show-full-text-in-mat-lists-word-wrap */
+::ng-deep .mat-list .mat-list-item {
+    height: initial !important;
+}

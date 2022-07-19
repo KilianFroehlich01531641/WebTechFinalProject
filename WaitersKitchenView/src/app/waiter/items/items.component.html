@@ -1,0 +1,78 @@
+<style>
+    .itemcard{
+        background-color: rgb(136, 240, 136);
+        border-left: 3px solid rgb(0, 0, 0);
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+
+    mat-list {
+        display: flex;
+        margin: 82px auto 32px;
+        padding: 0 16px;
+        max-width: 960p x;
+        flex-direction: column;
+        align-items: center;
+    }
+
+</style>
+
+<div class="itemcard" *ngIf="allPickUps.length !== 0">
+    <div [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+        <span [ngStyle]="{'font-weight': 'bold', 'flex-basis': '80%', 'padding': '10px'}">Currently Delivering</span>
+        <button (click)="deliverPickUps()" [ngStyle]="{'flex-basis': '20%', 'align-self' : 'center', 'margin-right' : '1%' }">Finish Delivery</button>
+    </div>
+    <div *ngFor="let x of allPickUps" [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}" >
+        <div mat-line [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+            <span [ngStyle]="{'font-weight': 'bold', 'flex-basis': '30%', 'align-self': 'center', 'padding': '10px'}">
+                {{x.title}}
+            </span>
+            <span [ngStyle]="{'font-weight': 'bold', 'flex-basis': '30%', 'align-self': 'center', 'padding': '10px'}">
+                Table: {{x.tableid}}
+            </span>
+        </div>
+        <div mat-line [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+            <span [ngStyle]="{ 'flex-basis': '30%', 'align-self': 'center', 'padding': '10px'}">
+                {{x.comment}}
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div *ngFor="let x of allItems">
+    <mat-list>
+        <mat-list-item>
+            <div mat-line [ngStyle]="{'display': 'flex', 'width': '93%', 'height': 'auto', 'align-item':'center'}">
+                <span
+                    [ngStyle]="{'margin-right': '15px', 'flex-basis': '5%', 'align-self': 'center', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}">
+                    #{{x.number}} 
+                </span>
+                <span [ngStyle]="{'font-weight': 'bold', 'flex-basis': '50%', 'align-self': 'center', 'padding': '10px'}">
+                    {{x.title}}
+                </span>
+            </div>
+            <div mat-line [ngStyle]="{'display': 'flex', 'width': '93%', 'height': 'auto', 'align-item':'center'}">
+                <span [ngStyle]="{'font-weight': 'bold', 'flex-basis': '20%', 'align-self': 'center', 'padding': '10px'}">
+                    Table: {{x.tableid}}
+                </span>
+                <span [ngStyle]="{ 'flex-basis': '20%', 'align-self': 'center', 'padding': '10px'}">
+                    {{x.status}}
+                </span>
+            </div>
+        
+            <button (click)="pickUpOrder(x.number)" [ngStyle]="{'flex-basis': '7%', 'align-self' : 'center', 'margin-right' : '1%' }">Pick up</button>
+            <div mat-line [ngStyle]="{'display': 'flex', 'width': '100%', 'height': 'auto', 'align-item':'center'}">
+                <span *ngIf="x.comment !== null" [ngStyle]="{ 'flex-basis': '100%', 'align-self': 'center', 'padding': '10px', 'padding-bottom': '20px'}">
+                    Comment: {{x.comment}}
+                </span>
+            </div>
+           
+            <mat-divider ></mat-divider>
+        </mat-list-item>
+    </mat-list>    
+</div>

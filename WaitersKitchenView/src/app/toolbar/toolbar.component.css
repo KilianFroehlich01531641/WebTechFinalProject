@@ -1,0 +1,64 @@
+mat-toolbar {
+    background-color: whitesmoke;
+    font-size: medium;
+    display: flex;
+}
+
+.flexstart {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flexend {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex_spacebetween {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-icon {
+    padding: 10px 2px;
+}
+
+.logged_in_as, .logout {
+    width: fit-content;
+}
+
+.logged_in_as {
+    margin-right: 5%;
+}
+
+.logout:hover {
+    color: rgb(189, 34, 34);
+    cursor: pointer;
+}
+
+.active {
+    color: rgb(35, 149, 226);
+}
+
+span {
+    font-size: small;
+}
+
+
+@media (max-width: 500px) {
+    mat-toolbar {
+        font-size: small;
+    }
+
+    span {
+        font-size: smaller;
+    }
+
+    mat-icon {
+        font-size: medium;
+
+        display: flex;
+        align-items: center;
+        width: fit-content;
+    }
+}

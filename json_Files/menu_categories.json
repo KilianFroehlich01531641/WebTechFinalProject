@@ -1,0 +1,22 @@
+[
+	{
+		"categoryId" : 1,
+		"title"  : "Pizza",
+		"desc"	 : "Traditional italien pizza made with love from our professianal pizza baker Claudio. All pizzas are prepared in a traditional stone oven.",
+	},
+	{
+		"categoryId" : 2,
+		"title"  : "Pasta",
+		"desc"	 : "All pasta is 100% hand-made. This is the reason, why we are opened only at night. All over the day, we prepare fresh pasta!",
+	},
+	{
+		"categoryId" : 3,
+		"title"  : "Weekly Specials",
+		"desc"	 : "Explore new dishes and promotions every week!"
+	},
+	
+]
+
+// Wanring: You may need to remove comments if they are not supported by your parser!
+// Credits: https://www.11inchpizza.com.au/the-ultimate-guide-to-traditional-italian-gourmet-pizza-toppings/
+// https://www.eataly.com/us_en/magazine/eataly-recipes/italian-pasta-recipes/

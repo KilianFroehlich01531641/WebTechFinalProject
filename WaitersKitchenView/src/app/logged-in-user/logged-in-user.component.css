@@ -1,0 +1,6 @@
+@media screen and (min-width: 900px) {
+    div, mat-toolbar {
+        margin: auto;
+        /* width: 80%; */
+    }
+}

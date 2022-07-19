@@ -1,0 +1,7 @@
+<div class="order-container" *ngFor="let order of orderList; let i = index">
+    <span> #{{i+1}} </span>
+
+    <div class="list-container shadow">
+        <app-order-list-item [order]=order></app-order-list-item>
+    </div>
+</div>

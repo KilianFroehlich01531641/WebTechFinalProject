@@ -1,0 +1,12 @@
+<style>
+    app-single-order {
+        display: flex;
+        margin: 82px auto 32px;
+        padding: 0 16px;
+        max-width: 960p x;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<app-single-order *ngFor="let x of orders" [currentOrder]="x"></app-single-order>

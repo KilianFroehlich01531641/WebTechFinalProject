@@ -1,0 +1,17 @@
+<mat-toolbar>
+    <div class="flexstart" [ngStyle]="{'flex': '70%'}">
+        <app-kitchen-toolbar *ngIf="userRole.toLowerCase() == 'kitchen'"></app-kitchen-toolbar>
+        <app-waiter-toolbar *ngIf="userRole.toLowerCase() == 'waiter'"></app-waiter-toolbar>
+    </div>
+    <div class="flex_spacebetween" [ngStyle]="{'flex': '30%', 'display': 'flex'}">
+        <div class="flexstart logged_in_as">
+            <mat-icon>how_to_reg</mat-icon>
+            <div [ngStyle]="{'padding': '5px 0'}">{{loggedInUser}} <span>({{userRole.slice(0,1).toUpperCase() +
+                    userRole.slice(1)}})</span></div>
+        </div>
+        <div class="flexend logout" (click)="logout()">
+            <div [ngStyle]="{'padding': '5px 0'}">logout</div>
+            <mat-icon>logout</mat-icon>
+        </div>
+    </div>
+</mat-toolbar>

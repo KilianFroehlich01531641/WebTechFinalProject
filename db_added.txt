@@ -1,0 +1,28 @@
+insert into consultations values (1, 2, '2021-12-06 08:30:16', 'Hunger', 'open');
+insert into consultations values (2, 5, '2021-12-06 09:30:16', 'Wo ist mein essen?', 'open');
+insert into consultations values (3, 3, '2021-12-07 08:30:16', 'da ist ein Haar in meiner Suppe', 'closed');
+
+insert into users values(4, 'Enrico', '{"Waiter"}', '')
+
+create table subscriptions(
+	endpoint varchar(250),
+	expirationtime varchar(250),
+	keys varchar(2500)
+);
+
+
+update users
+set password = '$2b$10$CKLKHIzAD78swuVkrvkOtegIa0ve8iEsnFPtBO4uBW/qJT8V9g9CC'
+where userid = 1;
+
+update users
+set password = '$2b$10$CKLKHIzAD78swuVkrvkOtenXQUXulfaj6yfUvUzswCe0xeKjm.YX.'
+where userid = 2;
+
+update users
+set password = '$2b$10$CKLKHIzAD78swuVkrvkOtef7s.A21kbtJfgZXEpllI1T9UU6uSCea'
+where userid = 3;
+
+update users
+set password = '$2b$10$CKLKHIzAD78swuVkrvkOteVOGJ3MoOyxAYv51d355ApbbKSm/JRpq'
+where userid = 4;

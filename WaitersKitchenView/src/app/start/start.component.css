@@ -1,0 +1,43 @@
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 100%;
+    margin: 0 30%;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 50%;
+}
+
+button {
+    flex: 25%;
+    font-size: large;
+    background-color: rgb(160, 228, 72);
+    margin: 10px;
+}
+
+@media (max-width: 500px) {
+    .content {
+        margin: 0 10%;
+    }
+
+    button {
+        font-size: medium;
+    }
+}
+
+@media (max-width: 200px) {
+    .content {
+        margin: 0 auto;
+    }
+
+    button {
+        font-size: 8vw;
+    }
+}

@@ -1,0 +1,12 @@
+<mat-list id="categorySelectionList">
+    <mat-list-item *ngFor="let category of categoryList.list; let i=index" (click)="toggleSelection(category.title)"
+        [ngStyle]="{'cursor': 'pointer'}">
+        {{category.title}}
+        <mat-checkbox mat-list-icon [checked]="selection.isSelected(category.title)"
+            (change)="selection.toggle(category.title)" disabled [ngStyle]="{'cursor': 'pointer'}"></mat-checkbox>
+    </mat-list-item>
+</mat-list>
+<div>
+    <button (click)="commit($event)">commit</button>
+    <button (click)="reset($event)">reset</button>
+</div>

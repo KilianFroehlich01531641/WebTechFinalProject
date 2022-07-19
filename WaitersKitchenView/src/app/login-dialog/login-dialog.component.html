@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Login as {{parentData.role}}</h2>
+<!-- <mat-dialog-content>Login as Kitchen</mat-dialog-content> -->
+<mat-dialog-actions>
+
+    <mat-form-field>
+        <input id="userInput" type="text" matInput placeholder="User" #user>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input id="passwordInput" type="password" matInput placeholder="Password" #password>
+    </mat-form-field>
+
+    <button mat-button (click)="login(user.value, password.value, parentData.role)">Log
+        in</button>
+
+</mat-dialog-actions>

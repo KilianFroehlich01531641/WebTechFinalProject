@@ -1,0 +1,6 @@
+<input type="text" [value]="dbitem.comment" [readonly]="readonly" (dblclick)="readonly = false; enterEdited.emit()"
+    (keyup.enter)="commit()" (keyup.escape)="reset()"  placeholder="add comment..." #input>
+<span >
+    <button (click)="commit()" [disabled]="readonly">OK</button>
+    <button (click)="reset()" [disabled]="readonly">reset</button>
+</span>

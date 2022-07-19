@@ -1,0 +1,17 @@
+<div class="order">
+    <span [ngStyle]="{'flex': '12%', 'text-align': 'center', 'font-style': 'italic'}">OrderID: <br>{{order.orderid}}</span>
+    <span [ngStyle]="{'flex': '12%', 'text-align': 'center', 'font-style': 'italic'}">Date: <br>{{getTimeStamp(order.orderdate).split('
+        ')[1]}}</span>
+    <span [ngStyle]="{'flex': '12%', 'text-align': 'center', 'font-style': 'italic'}">Table: <br>{{order.tableid}}</span>
+    <span [ngStyle]="{'flex': '64%', 'text-align': 'right', 'align-self': 'center', 'font-weight': 'bold', 'padding-right': '10px'}">{{order.totalamount.toFixed(2)}} €</span>
+</div>
+<mat-divider></mat-divider>
+<a routerLink="/kitchen/items" [fragment]="order.itemnumbers[i].toString()" class="subitem"
+    *ngFor="let itemid of order.itemids; let i = index">
+    <span [ngStyle]="{'flex': '10%', 'text-align': 'center'}"><span class="bold">{{order.itemnumbers[i]}}</span></span>
+    <span [ngStyle]="{'flex': '30%'}">{{order.itemtitles[i]}} ({{order.itemstatuses[i]}})</span>
+    <span [ngStyle]="{'flex': '10%', 'text-align': 'center'}">{{order.itemprices[i].toFixed(2)}} €</span>
+    <span [ngStyle]="{'flex': '25%', 'text-align': 'center'}">{{order.itemcomments[i]? order.itemcomments[i] :
+        "-"}}</span>
+    <span [ngStyle]="{'flex': '25%', 'text-align': 'center'}">menuID: {{itemid}} ({{order.menuitemstatuses[i]}})</span>
+</a>
